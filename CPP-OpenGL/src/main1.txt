@@ -1,0 +1,152 @@
+#include "core.h"
+#include "shader.h"
+#include "window.h"
+#include "input.h"
+#include "callback.h"
+#include "texture.h"
+
+int main(){
+
+	glfwInit();
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+	window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, title, NULL, NULL);
+	if (window == NULL) {
+		std::cout << "Failed to create window" << std::endl;
+		glfwTerminate();
+		return EXIT_FAILURE;
+	}
+	glfwMakeContextCurrent(window);
+	glewExperimental = GL_TRUE;
+	if (GLEW_OK != glewInit())
+	{
+		std::cout << "Failed to initialize GLEW" << std::endl;
+		return EXIT_FAILURE;
+	}
+	glfwSetFramebufferSizeCallback(window, viewPort);
+
+	float vertices[] = {
+		// position         / texcoord
+		 250.0f + 100.0f,  250.0f + 100.0f, 0.0f, 0.0f, 0.0f,
+		 750.0f - 100.0f,  250.0f + 100.0f, 0.0f, 1.0f, 0.0f,
+		 750.0f - 100.0f,  750.0f - 100.0f, 0.0f, 1.0f, 1.0f,
+		 250.0f + 100.0f,  750.0f - 100.0f, 0.0f, 0.0f, 1.0f,
+	};
+	unsigned int indices[]{
+		 0, 1, 2,
+		 2, 3, 0
+	};
+
+	// create Vertex Array & Vertex Buffer
+	unsigned int va, vb, ib;
+	// gen vertex
+	glGenVertexArrays(1, &va);
+	glGenBuffers(1, &vb);
+	glGenBuffers(1, &ib);
+
+	// bind vertex
+	glBindVertexArray(va);
+
+	// get buffer data
+	// vertex buffer
+	glBindBuffer(GL_ARRAY_BUFFER, vb);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices , GL_STATIC_DRAW);
+	// index buffer
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ib);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+	// position
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(0 * sizeof(float)));
+	glEnableVertexAttribArray(0);
+	// texture
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+	glEnableVertexAttribArray(1);
+
+
+	Shader ourShader("./shaders/basic.glsl");
+	ourShader.Bind();
+	Texture brick("./assets/img/brick.png");
+	brick.Bind();
+
+	glBindVertexArray(0);
+
+	float x = 0.0f, y = 0.0f, z = 0.0f;
+
+	while (!glfwWindowShouldClose(window)) {
+
+		glfwPollEvents();
+
+		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
+
+		userInput(window);
+		consoleLog();
+
+		//bind
+
+		ourShader.Bind();
+		glBindVertexArray(va);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ib);
+
+		glm::mat4 proj = glm::ortho(0.0f, 1000.0f, 0.0f, 1000.0f, -1.0f, 1.0f);
+		glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(x, y, 0.0f));
+		glm::mat4 MVP = proj * view;
+
+		ourShader.SetUniformMat4fv("u_MVP", MVP);
+		
+		if(glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS){
+			x-= 7.0f;
+		}
+		if(glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS){
+			x+= 7.0f;
+		}
+		if(glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS){
+			y+= 7.0f;
+		}
+		if(glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS){
+			y-= 7.0f;
+		}
+
+		// draw
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+
+		// unbind
+		glBindVertexArray(0);
+		glfwSwapBuffers(window);
+	}
+	glDeleteVertexArrays(1, &va);
+	glDeleteBuffers(1, &vb);
+	glDeleteBuffers(1, &ib);
+
+	glfwTerminate();
+	return 0;
+}
+
+void userInput(glm::vec3& pos, glm::vec3& rot){
+	// KEYBOARD
+	float speed = 2.0f;
+	if (Keyboard::key(GLFW_KEY_ESCAPE))
+		glfwSetWindowShouldClose(window, GL_TRUE);
+	if (Keyboard::key(GLFW_KEY_W))
+		pos.z += 0.05f * speed;
+	if (Keyboard::key(GLFW_KEY_S))
+		pos.z -= 0.05f * speed;
+	if (Keyboard::key(GLFW_KEY_LEFT_SHIFT))
+		pos.y -= 0.05f * speed;
+	if (Keyboard::key(GLFW_KEY_LEFT_CONTROL))
+		pos.y += 0.05f * speed;
+	if (Keyboard::key(GLFW_KEY_A))
+		pos.x += 0.05f * speed;
+	if (Keyboard::key(GLFW_KEY_D))
+		pos.x -= 0.05f * speed;
+	if (Keyboard::key(GLFW_KEY_RIGHT))
+		rot.y += 1.0f * speed;
+	if (Keyboard::key(GLFW_KEY_LEFT))
+		rot.y -= 1.0f * speed;
+	if (Keyboard::key(GLFW_KEY_UP))
+		rot.x -= 1.0f * speed;
+	if (Keyboard::key(GLFW_KEY_DOWN))
+		rot.x += 1.0f * speed;
+}

@@ -1,0 +1,49 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Compile C++",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-std=c++17",
+                "-g",
+                
+                // include folder
+    		    "-I.\\vendor",
+    		    "-I.\\assets\\classes\\libs",
+
+                // libraries folder
+		        "-L.\\vendor\\lib",
+            
+                // src				
+		        ".\\assets\\classes\\src\\*.cpp",
+		        ".\\vendor\\stb_image\\*.cpp",
+		        ".\\vendor\\imgui\\*.cpp",
+                		
+		        ".\\src\\*.cpp",			
+		        ".\\vendor\\glad\\glad.c",
+                "-lglfw3dll",
+                "-lopengl32",
+                "-lglew32",
+                "-o.\\OpenGL.exe"
+            ],
+             "group": {
+                 "kind": "build",
+                 "isDefault": true
+             },
+             "problemMatcher": "$gcc"
+            
+        // },
+        // {
+        //     "label": "run",
+        //     "type": "shell",
+        //     "command": ".\\OpenGL.exe",
+        //     "dependsOn": "Compile C++",
+        //     "group": {
+        //         "kind": "build",
+        //         "isDefault": true
+        //     }
+        }
+    ]
+}

@@ -1,0 +1,33 @@
+float cubeVertices[] = {
+    // position                 normal              texcoord
+    -0.5f, -0.5f,  0.5f,     0.0f,  0.0f,  1.0f,    0.0f, 0.0f, // 0 [FRONT] bottom left
+     0.5f, -0.5f,  0.5f,     0.0f,  0.0f,  1.0f,    1.0f, 0.0f, // 1 [FRONT] bottom right
+     0.5f,  0.5f,  0.5f,     0.0f,  0.0f,  1.0f,    1.0f, 1.0f, // 2 [FRONT] top right
+    -0.5f,  0.5f,  0.5f,     0.0f,  0.0f,  1.0f,    0.0f, 1.0f,	// 3 [FRONT] top left
+
+    -0.5f, -0.5f, -0.5f,     0.0f,  0.0f, -1.0f,    0.0f, 0.0f, // 4 [BACK] bottom left
+     0.5f, -0.5f, -0.5f,     0.0f,  0.0f, -1.0f,    1.0f, 0.0f, // 5 [BACK] bottom right
+     0.5f,  0.5f, -0.5f,     0.0f,  0.0f, -1.0f,    1.0f, 1.0f, // 6 [BACK] top right
+    -0.5f,  0.5f, -0.5f,     0.0f,  0.0f, -1.0f,    0.0f, 1.0f, // 7 [BACK] top left
+
+    -0.5f,  0.5f,  0.5f,    -1.0f,  0.0f,  0.0f,    1.0f, 0.0f, // 8 [LEFT] top left	
+    -0.5f,  0.5f, -0.5f,    -1.0f,  0.0f,  0.0f,    1.0f, 1.0f, // 9 [LEFT] top right
+    -0.5f, -0.5f, -0.5f,    -1.0f,  0.0f,  0.0f,    0.0f, 1.0f, //10 [LEFT] bottom right
+    -0.5f, -0.5f,  0.5f,    -1.0f,  0.0f,  0.0f,    0.0f, 0.0f, //11 [LEFT] bottom left
+
+     0.5f,  0.5f,  0.5f,    -1.0f,  0.0f,  0.0f,    1.0f, 0.0f, //12 [RIGHT] top left	
+     0.5f,  0.5f, -0.5f,    -1.0f,  0.0f,  0.0f,    1.0f, 1.0f, //13 [RIGHT] top right
+     0.5f, -0.5f, -0.5f,    -1.0f,  0.0f,  0.0f,    0.0f, 1.0f, //14 [RIGHT] bottom right
+     0.5f, -0.5f,  0.5f,    -1.0f,  0.0f,  0.0f,    0.0f, 0.0f, //15 [RIGHT] bottom left
+
+		-0.5f,  0.5f,  0.5f,     0.0f,  0.0f,  1.0f,    1.0f, 0.0f, //16 [TOP] top left
+     0.5f,  0.5f,  0.5f,     0.0f,  0.0f,  1.0f,    1.0f, 1.0f, //17 [TOP] top right
+     0.5f,  0.5f, -0.5f,     0.0f,  0.0f,  1.0f,    0.0f, 1.0f, //18 [TOP] bottom right
+    -0.5f,  0.5f, -0.5f,     0.0f,  0.0f,  1.0f,    0.0f, 0.0f,	//19 [TOP] bottom left
+		
+		-0.5f, -0.5f,  0.5f,     0.0f,  0.0f,  1.0f,    1.0f, 0.0f, //20 [BOTTOM] top left
+     0.5f, -0.5f,  0.5f,     0.0f,  0.0f,  1.0f,    1.0f, 1.0f, //21 [BOTTOM] top right
+     0.5f, -0.5f, -0.5f,     0.0f,  0.0f,  1.0f,    0.0f, 1.0f, //22 [BOTTOM] bottom right
+    -0.5f, -0.5f, -0.5f,     0.0f,  0.0f,  1.0f,    0.0f, 0.0f,	//23 [BOTTOM] bottom left
+
+  };
