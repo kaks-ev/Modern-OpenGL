@@ -1,2 +1,10 @@
-﻿  Main.cpp
-  Engine.vcxproj -> C:\Users\Evangelion\OneDrive\Dev\Game Engine\Engine\x64\Debug\Engine.exe
+﻿  bg.cpp
+  mesh.cpp
+  Generating Code...
+glew32s.lib(glew.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glew32s.lib(glew.obj)' or at 'C:\Users\Evangelion\OneDrive\Dev\Modern-OpenGL\Flappy-Bird\x64\Debug\vc120.pdb'; linking object as if no debug info
+LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
+bg.obj : error LNK2019: unresolved external symbol "public: __cdecl Mesh::Mesh(void)" (??0Mesh@@QEAA@XZ) referenced in function "public: __cdecl background::background(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &)" (??0background@@QEAA@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@0@Z)
+bg.obj : error LNK2019: unresolved external symbol "public: __cdecl Mesh::~Mesh(void)" (??1Mesh@@QEAA@XZ) referenced in function "int `public: __cdecl background::background(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &)'::`1'::dtor$2" (?dtor$2@?0???0background@@QEAA@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@0@Z@4HA)
+bg.obj : error LNK2019: unresolved external symbol "public: void __cdecl Mesh::Bind(void)" (?Bind@Mesh@@QEAAXXZ) referenced in function "public: void __cdecl background::bind(void)" (?bind@background@@QEAAXXZ)
+C:\Users\Evangelion\OneDrive\Dev\Modern-OpenGL\Flappy-Bird\x64\Debug\Engine.exe : fatal error LNK1120: 3 unresolved externals

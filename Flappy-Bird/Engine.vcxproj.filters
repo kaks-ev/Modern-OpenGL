@@ -66,6 +66,15 @@
     <ClCompile Include="assets\IO\keyListener.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="assets\model\pipe.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="assets\model\bg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="assets\renderer\mesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="assets\core.h">
@@ -104,6 +113,15 @@
     <ClInclude Include="assets\IO\keyListener.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="assets\model\pipe.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="assets\model\bg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="assets\renderer\mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\shaders\bird.glsl">
@@ -114,6 +132,7 @@
     </None>
     <None Include="glfw3.dll" />
     <None Include="glew32.dll" />
+    <None Include="assets\shaders\pipe.glsl" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\img\bg.jpg">
@@ -140,13 +159,5 @@
     <Image Include="assets\img\grass.jpg">
       <Filter>Resource Files\Textures</Filter>
     </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="source\ShaderTutorial.txt">
-      <Filter>Source Files\core</Filter>
-    </Text>
-    <Text Include="source\test.txt">
-      <Filter>Source Files</Filter>
-    </Text>
   </ItemGroup>
 </Project>

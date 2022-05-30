@@ -62,7 +62,7 @@ bool Window::init()
 
 void Window::render()
 {
-	glClearColor(1.0f, 0.5f, 1.0f, 1.0f);
+	glClearColor(0.8f, 0.8f, 0.8f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	currentTime = (float)glfwGetTime();
