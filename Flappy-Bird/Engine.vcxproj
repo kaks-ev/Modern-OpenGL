@@ -147,9 +147,12 @@
     <ClCompile Include="assets\renderer\shader.cpp" />
     <ClCompile Include="assets\Graphics\vertexArray.cpp" />
     <ClCompile Include="assets\Graphics\vertexBuffer.cpp" />
+    <ClCompile Include="assets\model\bg.cpp" />
     <ClCompile Include="Dependencies\stb_image\stb_image.cpp" />
     <ClCompile Include="assets\renderer\icon.cpp" />
     <ClCompile Include="assets\IO\keyListener.cpp" />
+    <ClCompile Include="assets\model\pipe.cpp" />
+    <ClCompile Include="assets\renderer\mesh.cpp" />
     <ClCompile Include="source\Main.cpp" />
     <ClCompile Include="assets\renderer\texture.cpp" />
     <ClCompile Include="assets\renderer\window.cpp" />
@@ -162,21 +165,21 @@
     <ClInclude Include="assets\Graphics\vertexArray.h" />
     <ClInclude Include="assets\Graphics\vertexBuffer.h" />
     <ClInclude Include="assets\Graphics\vertexBufferLayout.h" />
+    <ClInclude Include="assets\model\bg.h" />
     <ClInclude Include="Dependencies\stb_image\stb_image.h" />
     <ClInclude Include="assets\renderer\icon.h" />
     <ClInclude Include="assets\renderer\texture.h" />
     <ClInclude Include="assets\renderer\window.h" />
     <ClInclude Include="assets\IO\keyListener.h" />
+    <ClInclude Include="assets\model\pipe.h" />
+    <ClInclude Include="assets\renderer\mesh.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\shaders\bird.glsl" />
     <None Include="assets\shaders\bg.glsl" />
+    <None Include="assets\shaders\pipe.glsl" />
     <None Include="glew32.dll" />
     <None Include="glfw3.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="source\ShaderTutorial.txt" />
-    <Text Include="source\test.txt" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\img\bg.jpg" />

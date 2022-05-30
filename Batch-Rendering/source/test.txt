@@ -1,0 +1,202 @@
+#include "window.h"
+#include "Shader.h"
+#include "Texture.h"
+
+int main() {
+
+	Window Game("Flappy Bird - OpenGL");
+
+	Shader birdShader("bird.glsl");
+
+	float a = -0.4f;
+
+	float vertices[] = {
+		// position					/ texCoords
+		 0.5f, -0.5f, 0.0f,	1.0f, 0.0f,
+		-0.5f, -0.5f, 0.0f,	0.0f, 0.0f,
+		-0.5f,  0.5f, 0.0f,	0.0f, 1.0f,
+		 0.5f,  0.5f, 0.0f,	1.0f, 1.0f
+	};
+
+	unsigned int indices[] = {
+		0, 1, 2,
+		2, 3, 0
+	};
+
+	unsigned int vao, vbo, ebo;
+	glGenVertexArrays(1, &vao);
+	glBindVertexArray(vao);
+
+	glGenBuffers(1, &vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), &vertices, GL_STATIC_DRAW);
+
+	glGenBuffers(1, &ebo);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), &indices, GL_STATIC_DRAW);
+
+	// position
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*) (0 * sizeof(float)));
+	glEnableVertexAttribArray(0);
+	// Textures
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+	glEnableVertexAttribArray(1);
+
+	
+
+	// second object
+	Shader bgShader("bg.glsl");
+
+	float vertices2[] = {
+		// position					/ Color					 / texcoords
+		-1.0f,-1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f,
+		 0.0f,-1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,
+		 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,
+		-1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,
+	};
+
+	unsigned int indices2[] = {
+		0, 1, 2,
+		2, 3, 0
+	};
+
+	unsigned int vao2, vbo2, ebo2;
+	glGenVertexArrays(1, &vao2);
+	glBindVertexArray(vao2);
+
+	glGenBuffers(1, &vbo2);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo2);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices2), &vertices2, GL_STATIC_DRAW);
+
+	glGenBuffers(1, &ebo2);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo2);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices2), &indices2, GL_STATIC_DRAW);
+
+	// position
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(0 * sizeof(float)));
+	glEnableVertexAttribArray(0);
+	// textures
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+	glEnableVertexAttribArray(2);
+
+	unsigned int birdTexture1, birdTexture2, bgTexture;
+	unsigned char* data = nullptr;
+	int Width, Height, NrChannels;
+	std::string filePath;
+	const std::string& path = filePath;
+
+	stbi_set_flip_vertically_on_load(true);
+	
+	// TEXTURES
+	filePath = "bird.png";
+	glGenTextures(1, &birdTexture1);
+	glBindTexture(GL_TEXTURE_2D, birdTexture1);
+	// set the texture wrapping parameters
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	// set texture wrapping to GL_REPEAT (default wrapping method)
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	// set texture filtering parameters
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	// load image, create texture and generate mipmaps
+	data = stbi_load(path.c_str(), &Width, &Height, &NrChannels, 0);
+	if (data)
+	{
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, Width, Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+	else
+	{
+		std::cout << "Failed to load texture" << std::endl;
+	}
+	stbi_image_free(data);
+
+	// TEXTURES
+	filePath = "gorilla.png";
+	glGenTextures(1, &birdTexture2);
+	glBindTexture(GL_TEXTURE_2D, birdTexture2);
+	// set the texture wrapping parameters
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	// set texture wrapping to GL_REPEAT (default wrapping method)
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	// set texture filtering parameters
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	// load image, create texture and generate mipmaps
+	data = stbi_load(path.c_str(), &Width, &Height, &NrChannels, 0);
+	if (data)
+	{
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, Width, Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+	else
+	{
+		std::cout << "Failed to load texture" << std::endl;
+	}
+	stbi_image_free(data);
+
+	// TEXTURES
+	filePath = "bg.jpg";
+	glGenTextures(1, &bgTexture);
+	glBindTexture(GL_TEXTURE_2D, bgTexture);
+	// set the texture wrapping parameters
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	// set texture wrapping to GL_REPEAT (default wrapping method)
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	// set texture filtering parameters
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	// load image, create texture and generate mipmaps
+	data = stbi_load(path.c_str(), &Width, &Height, &NrChannels, 0);
+	if (data)
+	{
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Width, Height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+	else
+	{
+		std::cout << "Failed to load texture" << std::endl;
+	}
+	stbi_image_free(data);
+
+	while (Game.loop()) {
+		Game.render();
+		// draw background
+		{
+			glActiveTexture(GL_TEXTURE2);
+			glBindTexture(GL_TEXTURE_2D, bgTexture);
+
+			bgShader.Bind();
+			bgShader.SetUniformInt("uTexture0", 2);
+
+			glBindVertexArray(vao2);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo2);
+			glDrawElements(GL_TRIANGLES, sizeof(indices2) / sizeof(unsigned int), GL_UNSIGNED_INT, nullptr);
+		}
+
+		// draw bird
+		{
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, birdTexture1);
+			glActiveTexture(GL_TEXTURE1);
+			glBindTexture(GL_TEXTURE_2D, birdTexture2);
+
+			birdShader.Bind();
+			birdShader.SetUniformInt("uTexture0", 0);
+			birdShader.SetUniformInt("uTexture1", 1);
+
+			glBindVertexArray(vao);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+			glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(unsigned int), GL_UNSIGNED_INT, nullptr);
+		}
+
+
+		Game.update();
+	}
+	glDeleteVertexArrays(1, &vao);
+	glDeleteBuffers(1, &vbo);
+	glDeleteBuffers(1, &ebo);
+
+	glDeleteVertexArrays(1, &vao2);
+	glDeleteBuffers(1, &vbo2);
+	glDeleteBuffers(1, &ebo2);
+
+	return 0;
+}

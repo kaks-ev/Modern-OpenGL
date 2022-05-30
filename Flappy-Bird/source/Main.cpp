@@ -6,6 +6,7 @@
 #include "IO/keyListener.h"
 
 Window Game("Flappy Bird - OpenGL");
+
 Keyboard keyboard;
 bool gameover;
 
@@ -14,7 +15,7 @@ int bg = 0;
 float delta;
 
 glm::vec3 position(0.0f);
-glm::vec3 rot(0.0f);
+float rotation = 0.0f;
 
 void fall();
 
@@ -86,19 +87,20 @@ int main() {
 	birdShader.SetUniformMatrix("projection", birdProjection);
 	
 	glm::mat4 model = glm::mat4(1.0f);
-	model = glm::translate(model, position);
+	model = glm::rotate(glm::radians(rotation), glm::vec3(0.0f, 0.0f, 1.0f));
 	birdShader.SetUniformMatrix("model", model);
 
 	glm::mat4 view = glm::mat4(1.0f);
+	view = glm::translate(view, position);
 	birdShader.SetUniformMatrix("view", view);
 
 	while (Game.loop()) {
 		Game.render();
 
 		// =========== background ===========
+		if (xScroll % 335 == 0) bg++;
 		bgShader.Bind();
 		xScroll--;
-		if (xScroll % 335 == 0) bg++;
 		bgTexture.Bind(0);
 		bgShader.SetUniformInt("uTexture", 0);
 	
@@ -111,8 +113,8 @@ int main() {
 			glDrawElements(GL_TRIANGLES, bgEBO.GetCount(), GL_UNSIGNED_INT, 0);
 		}
 		bgShader.Unbind();
-		bgEBO.Unbind();
 		bgVAO.Unbind();
+		bgEBO.Unbind();
 
 		// =========== bird ===========
 		birdShader.Bind();
@@ -121,25 +123,33 @@ int main() {
 
 		fall();
 		position.y -= delta;
-		if (keyboard.keyWentDown(GLFW_KEY_UP) || keyboard.keyWentDown(GLFW_KEY_W) || keyboard.keyWentDown(GLFW_KEY_SPACE)) {
-			std::cout << "up\n";
-			delta += 0.3f;
+		if (keyboard.key(GLFW_KEY_UP) || keyboard.key(GLFW_KEY_W) || keyboard.key(GLFW_KEY_SPACE)) {
+
+			rotation += 13.0f * 0.8f;
+			if (rotation >= 45.0f) {
+				rotation = 45.0f;
+			}
+			delta = 0.075f * 0.5f;
 			position.y += delta;
 		}
-		else delta += 0.5f;
 
-		model = glm::translate(model, position);
+		model = glm::rotate(glm::radians(rotation), glm::vec3(0.0f, 0.0f, 1.0f));
 		birdShader.SetUniformMatrix("model", model);
-
+		view = glm::translate(view, position);
+		birdShader.SetUniformMatrix("view", view);
 		
 		birdVAO.Bind();
 		birdEBO.Bind();
+
+//	glLineWidth(2.0f);
+//	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		glDrawElements(GL_TRIANGLES, birdEBO.GetCount(), GL_UNSIGNED_INT, 0);
+//	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		
 		birdShader.Unbind();
-		birdVAO.Unbind();
 		birdEBO.Unbind();
-		
+		birdVAO.Unbind();
+
 		Game.update();
 	}
 
@@ -147,6 +157,10 @@ int main() {
 }
 
 void fall() {
-	delta = 0.002f;
-	position.y -= delta;
+	delta = 0.013f;
+
+	rotation -= 4.8f * 0.8f;
+	if (rotation < -40.0f) {
+		rotation = -40.0f;
+	}
 }
