@@ -24,6 +24,7 @@
     <ProjectGuid>{27300a7c-fcc0-4b03-b3f4-f55b1b03768e}</ProjectGuid>
     <RootNamespace>Engine</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>YottaEngine</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -116,7 +117,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\assets;$(SolutionDir)\Dependencies;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\sources;$(SolutionDir)\Dependencies;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -142,12 +143,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="assets\Graphics\indexBuffer.cpp" />
-    <ClCompile Include="assets\renderer\renderer.cpp" />
-    <ClCompile Include="assets\renderer\shader.cpp" />
-    <ClCompile Include="assets\Graphics\vertexArray.cpp" />
-    <ClCompile Include="assets\Graphics\vertexBuffer.cpp" />
-    <ClCompile Include="assets\IO\Camera.cpp" />
+    <ClCompile Include="sources\Graphics\indexBuffer.cpp" />
+    <ClCompile Include="sources\IO\Camera.cpp" />
+    <ClCompile Include="sources\IO\OrthographicCamera.cpp" />
+    <ClCompile Include="sources\renderer\renderer.cpp" />
+    <ClCompile Include="sources\renderer\shader.cpp" />
+    <ClCompile Include="sources\Graphics\vertexArray.cpp" />
+    <ClCompile Include="sources\Graphics\vertexBuffer.cpp" />
     <ClCompile Include="Dependencies\imgui\imgui.cpp" />
     <ClCompile Include="Dependencies\imgui\imgui_demo.cpp" />
     <ClCompile Include="Dependencies\imgui\imgui_draw.cpp" />
@@ -156,23 +158,24 @@
     <ClCompile Include="Dependencies\imgui\imgui_tables.cpp" />
     <ClCompile Include="Dependencies\imgui\imgui_widgets.cpp" />
     <ClCompile Include="Dependencies\stb_image\stb_image.cpp" />
-    <ClCompile Include="assets\renderer\icon.cpp" />
-    <ClCompile Include="assets\IO\keyListener.cpp" />
-    <ClCompile Include="assets\renderer\mesh.cpp" />
-    <ClCompile Include="assets\IO\mouseListener.cpp" />
-    <ClCompile Include="source\Main.cpp" />
-    <ClCompile Include="assets\renderer\texture.cpp" />
-    <ClCompile Include="assets\renderer\window.cpp" />
+    <ClCompile Include="sources\renderer\icon.cpp" />
+    <ClCompile Include="sources\IO\keyListener.cpp" />
+    <ClCompile Include="sources\Graphics\Mesh.cpp" />
+    <ClCompile Include="sources\IO\mouseListener.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="sources\renderer\texture.cpp" />
+    <ClCompile Include="sources\renderer\window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="assets\core.h" />
-    <ClInclude Include="assets\Graphics\indexBuffer.h" />
-    <ClInclude Include="assets\renderer\renderer.h" />
-    <ClInclude Include="assets\renderer\shader.h" />
-    <ClInclude Include="assets\Graphics\vertexArray.h" />
-    <ClInclude Include="assets\Graphics\vertexBuffer.h" />
-    <ClInclude Include="assets\Graphics\vertexBufferLayout.h" />
-    <ClInclude Include="assets\IO\Camera.h" />
+    <ClInclude Include="sources\core.h" />
+    <ClInclude Include="sources\Graphics\indexBuffer.h" />
+    <ClInclude Include="sources\IO\Camera.h" />
+    <ClInclude Include="sources\IO\OrthographicCamera.h" />
+    <ClInclude Include="sources\renderer\renderer.h" />
+    <ClInclude Include="sources\renderer\shader.h" />
+    <ClInclude Include="sources\Graphics\vertexArray.h" />
+    <ClInclude Include="sources\Graphics\vertexBuffer.h" />
+    <ClInclude Include="sources\Graphics\vertexBufferLayout.h" />
     <ClInclude Include="Dependencies\imgui\imconfig.h" />
     <ClInclude Include="Dependencies\imgui\imgui.h" />
     <ClInclude Include="Dependencies\imgui\imgui_impl_glfw.h" />
@@ -183,12 +186,12 @@
     <ClInclude Include="Dependencies\imgui\imstb_textedit.h" />
     <ClInclude Include="Dependencies\imgui\imstb_truetype.h" />
     <ClInclude Include="Dependencies\stb_image\stb_image.h" />
-    <ClInclude Include="assets\renderer\icon.h" />
-    <ClInclude Include="assets\renderer\texture.h" />
-    <ClInclude Include="assets\renderer\window.h" />
-    <ClInclude Include="assets\IO\keyListener.h" />
-    <ClInclude Include="assets\renderer\mesh.h" />
-    <ClInclude Include="assets\IO\mouseListener.h" />
+    <ClInclude Include="sources\renderer\icon.h" />
+    <ClInclude Include="sources\renderer\texture.h" />
+    <ClInclude Include="sources\renderer\window.h" />
+    <ClInclude Include="sources\IO\keyListener.h" />
+    <ClInclude Include="sources\Graphics\Mesh.h" />
+    <ClInclude Include="sources\IO\mouseListener.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\shaders\default.glsl" />
@@ -196,8 +199,12 @@
     <None Include="glfw3.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="assets\bg.jpg" />
+    <Image Include="assets\brick.png" />
     <Image Include="assets\img\bg.jpg" />
     <Image Include="assets\img\bird.png" />
+    <Image Include="assets\img\brick.png" />
+    <Image Include="assets\img\defaultPlane.jpg" />
     <Image Include="assets\img\gameover.png" />
     <Image Include="assets\img\gorilla.png" />
     <Image Include="assets\img\grass.jpg" />
@@ -205,7 +212,15 @@
     <Image Include="assets\img\logo-invert.png" />
     <Image Include="assets\img\logo.jpg" />
     <Image Include="assets\img\logo.png" />
+    <Image Include="assets\img\mario.png" />
+    <Image Include="assets\img\obstacle.png" />
     <Image Include="assets\img\pipe.png" />
+    <Image Include="assets\img\wall.jpg" />
+    <Image Include="assets\mario.png" />
+    <Image Include="assets\obstacle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Source.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

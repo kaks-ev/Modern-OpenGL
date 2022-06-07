@@ -1,2 +1,5 @@
-﻿  window.cpp
-  Engine.vcxproj -> C:\Users\Evangelion\OneDrive\Dev\Modern-OpenGL\Batch-Rendering\x64\Debug\Engine.exe
+﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(514,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (Engine.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  Main.cpp
+C:\Users\Evangelion\OneDrive\Dev\Modern-OpenGL\Batch-Rendering\Main.cpp(139,36): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Evangelion\OneDrive\Dev\Modern-OpenGL\Batch-Rendering\Main.cpp(139,33): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Engine.vcxproj -> C:\Users\Evangelion\OneDrive\Dev\Modern-OpenGL\Batch-Rendering\x64\Debug\YottaEngine.exe

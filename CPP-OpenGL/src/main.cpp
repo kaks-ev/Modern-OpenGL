@@ -22,6 +22,7 @@ void procInput(GLFWwindow* window){
 	}
 }
 
+
 int main(){
 
 	glfwInit();
@@ -266,4 +267,8 @@ int main(){
 	
 	glfwDestroyWindow(window);
 	return 0;
+}
+
+void procinput(double dt){
+	
 }
