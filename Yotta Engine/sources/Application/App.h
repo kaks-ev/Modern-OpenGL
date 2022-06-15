@@ -13,7 +13,6 @@ public:
 
 	Window window = Window("Yotta Engine");
 	Shader shader = Shader("assets/shaders/default.glsl");
-	Texture texture = Texture("assets/img/plane.jpg");
 
 	void onStart();
 	void update();

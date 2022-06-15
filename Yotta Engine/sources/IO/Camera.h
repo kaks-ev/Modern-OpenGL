@@ -17,6 +17,7 @@ public:
 
 	Camera(glm::vec3 camPos);
 	void OrthoProjection();
+	void PerspectiveProjection();
 	glm::mat4 GetViewMatrix();
 	glm::mat4 GetProjectionMatrix() { return m_Projection;  }
 };

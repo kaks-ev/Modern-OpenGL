@@ -2,6 +2,7 @@
 #define CORE_H
 
 #include <iostream>
+#include <stdio.h>
 #include <string>
 #include <fstream>
 #include <sstream>

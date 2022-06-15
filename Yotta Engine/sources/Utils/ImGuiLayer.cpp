@@ -1,31 +1,40 @@
 #include "ImGuiLayer.h"
 
-void ImGuiLayer::Init(GLFWwindow* window) {
+void ImGuiLayer::Init(GLFWwindow* window) 
+{
 	// IMGUI INITIALIZING
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
-	ImGuiIO& IO = ImGui::GetIO();
-	(void)IO;
+	ImGuiIO& io = ImGui::GetIO(); (void)io;
+
+
 	ImGui_ImplGlfw_InitForOpenGL(window, true);
 	ImGui_ImplOpenGL3_Init("#version 460");
 }
 
-void ImGuiLayer::Begin() {
+
+void ImGuiLayer::Begin() 
+{
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplGlfw_NewFrame();
 	ImGui::NewFrame();
+
+	Overlay();
 }
+
 void ImGuiLayer::End() {
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
+
 void ImGuiLayer::Detach() {
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplGlfw_Shutdown();
 	ImGui::DestroyContext();
 }
 
-void ImGuiLayer::Overlay() {
+void ImGuiLayer::Overlay() 
+{
 
 	static int corner = 0;
 	ImGuiIO& io = ImGui::GetIO();
@@ -57,7 +66,8 @@ void ImGuiLayer::Overlay() {
 	ImGui::End();
 }
 
-void ImGuiLayer::Settings() {
+void ImGuiLayer::Settings() 
+{
 
 	// Yotta Engine Style Editor
 	ImGuiStyle& style = ImGui::GetStyle();

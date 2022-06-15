@@ -14,6 +14,9 @@ glm::mat4 Camera::GetViewMatrix()
 
 void Camera::OrthoProjection()
 {
-	m_Projection = glm::ortho(0.0f, 16.0f * 1.5f, 0.0f, 9.0f * 1.5f, 0.0f, 100.0f);
+	m_Projection = glm::ortho(0.0f, 16.0f * 1.7f, 0.0f, 9.0f * 1.7f, 0.0f, 100.0f);
+}
+void Camera::PerspectiveProjection() {
+	//m_Projection = glm::perspective()
 }
 

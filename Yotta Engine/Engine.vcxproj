@@ -170,6 +170,7 @@
   <ItemGroup>
     <ClInclude Include="sources\Application\App.h" />
     <ClInclude Include="sources\Graphics\vertex.h" />
+    <ClInclude Include="sources\Utils\CoreLayer.h" />
     <ClInclude Include="sources\Utils\ImGuiLayer.h" />
     <ClInclude Include="sources\core.h" />
     <ClInclude Include="sources\Graphics\indexBuffer.h" />

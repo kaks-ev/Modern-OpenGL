@@ -185,6 +185,9 @@
     <ClInclude Include="sources\Graphics\vertex.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="sources\Utils\CoreLayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="glfw3.dll" />

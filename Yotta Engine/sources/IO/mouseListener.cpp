@@ -15,6 +15,7 @@ bool Mouse::buttonsChanged[GLFW_MOUSE_BUTTON_LAST] = { 0 };
 
 void Mouse::cursorPosCallback(GLFWwindow* window, double _x, double _y)
 {
+	ImGui_ImplGlfw_CursorPosCallback(window, _x, _y);
 	x = _x;
 	y = _y;
 	if (firstMouse) {
@@ -30,6 +31,8 @@ void Mouse::cursorPosCallback(GLFWwindow* window, double _x, double _y)
 }
 void Mouse::mouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
 {
+	ImGui_ImplGlfw_MouseButtonCallback(window, button, action, mods);
+
 	if (action != GLFW_RELEASE)
 	{
 		if (!buttons[button]) {
@@ -46,6 +49,8 @@ void Mouse::mouseButtonCallback(GLFWwindow* window, int button, int action, int 
 	}
 }
 void Mouse::mouseScrollCalback(GLFWwindow* window, double dx, double dy) {
+
+	ImGui_ImplGlfw_ScrollCallback(window, dx, dy);
 
 	scrollDX = dx;
 	scrollDY = dy;

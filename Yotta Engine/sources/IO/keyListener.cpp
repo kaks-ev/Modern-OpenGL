@@ -2,12 +2,18 @@
 
 void Keyboard::keyCallBack(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
+	ImGuiIO& io = ImGui::GetIO();
+
+	ImGui_ImplGlfw_KeyCallback(window, key, scancode, action, mods);
+	io.WantCaptureKeyboard;
+
 	if (action != GLFW_RELEASE) {
 		if (!keys[key])
 			keys[key] = true;
 	}
 	else {
 		keys[key] = false;
+		
 	}
 
 	keysChanged[key] = action != GLFW_REPEAT;
