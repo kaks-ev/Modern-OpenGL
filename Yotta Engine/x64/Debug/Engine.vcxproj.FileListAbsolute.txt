@@ -1,5 +1,0 @@
-C:\Users\Evangelion\OneDrive\Dev\Visual Studio\C++\Engine\x64\Debug\Engine.exe
-C:\Users\Evangelion\OneDrive\Dev\Game Engine\Engine\x64\Debug\Engine.exe
-C:\Users\Evangelion\OneDrive\Dev\Modern-OpenGL\Flappy-Bird\x64\Debug\Engine.exe
-C:\Users\Evangelion\OneDrive\Dev\Modern-OpenGL\Batch-Rendering\x64\Debug\YottaEngine.exe
-C:\Users\Evangelion\OneDrive\Dev\Modern-OpenGL\Yotta Engine\x64\Debug\YottaEngine.exe
